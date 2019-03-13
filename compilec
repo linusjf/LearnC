@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
 # display usage
 [ $# -eq 0 ] && { echo "Usage: $0 <File Name without extension>";exit 1; }
-`gcc -std=c11 $1.c -o $1.exe` 
+`gcc -std=c11 $1.c -o $1.exe`
+exec ./$1.exe
