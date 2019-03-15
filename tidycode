@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# display usage
+[ $# -eq 0 ] && { echo "Usage: $0 file";exit 1; }
+# Run the following to rid whitespaces and
+# beautify code.
+`tr -cd '[:print:]\n' < $1 > $1.txt && mv $1.txt $1`
+`clang-format -i  $1`
