@@ -8,10 +8,10 @@ int main() {
   char *lower, *upper, *chr;
   int len;
   len = strlen(src);
- lower = (char *)malloc(sizeof(char)*len);
+ lower = (char *)malloc(len+1);
   strncpy(lower, src, len+1);
 
-  upper = (char *)malloc(sizeof(char)*len);
+  upper = (char *)malloc(len+1);
   strncpy(upper, src, len+1);
 
  for (int i = 0; i < len; ++i) {
