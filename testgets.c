@@ -1,5 +1,6 @@
 #include <stdio.h>
 #define MAX 10
+
 int main() {
   char buf[MAX];
   // will pop warning since gets is deprecated in

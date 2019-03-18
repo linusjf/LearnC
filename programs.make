@@ -53,6 +53,8 @@ PRGS := $(patsubst %.c,%,$(SRCS))
 PRG_SUFFIX=.exe
 BINS := $(patsubst %,%$(PRG_SUFFIX),$(PRGS))
 ## OBJS are automagically compiled by make.
+## It's not quite magic.Relies on implicit 
+## rule for .c files.
 OBJS := $(patsubst %,%.o,$(PRGS))
 ##
 all : $(BINS)
@@ -65,7 +67,9 @@ ifeq ($(PRG_SUFFIX_FLAG),0)
 else
         BIN = $@
 endif
-## Compile the executables
+## Compile and link  the executable
+## The rule below explicitly links the 
+## .o files.
 %$(PRG_SUFFIX) : $(OBJS)
 	$(CC) $(OBJ)  $(LDFLAGS) -o $(BIN)
 ##
