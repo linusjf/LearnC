@@ -6,7 +6,8 @@ for (char **env = envp; *env != 0; env++)
   {
     char *thisEnv = *env;
    char *envVar =  getenv(thisEnv);
-  printf("%s=%s\n",thisEnv, envVar);
+   if (strstr(thisEnv,envVar) != NULL)
+        printf("%s\n",thisEnv);
   }
   return 0;
 }
