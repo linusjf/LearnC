@@ -47,7 +47,6 @@ int main() {
   int numbers[] = {5, 1, 2, 4, 3};
   int nums[] = {5, 1, 2, 4, 3};
   int count = sizeof(numbers)/sizeof(numbers[0]);
-  int temp;
   printf("Original: ");
   for (int i = 0; i < count; i++) {
     printf("%d ", numbers[i]);

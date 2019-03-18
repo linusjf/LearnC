@@ -11,7 +11,7 @@ typedef struct {
   Address address;
 } Employee;
 int main() {
-  Employee emp = {1000, "John Smith", "Developer", "123 Main Street", "Chicago"};
+  Employee emp = {1000, "John Smith", "Developer",{"123 Main Street", "Chicago"}};
   printf("Emp Id: %d \n", emp.id);
   printf("Name: %s \n", emp.name);
   printf("Title: %s \nAddress:\n", emp.title);

@@ -11,7 +11,6 @@ int main() {
   // incorrect:  // int *chars = malloc (sizeof (char) * len1);  // correct:
   char *chars = malloc(sizeof(char) * len1);
   int *counts = malloc(sizeof(int) * len1);
-  int i;
   memset(counts,0,len1*sizeof(int));
   memset(chars,' ',len1*sizeof(char));
 
@@ -40,9 +39,7 @@ int main() {
     }
   }
   printf("Full string: %s\n", str1);
-  char ch2;
-  int count;
-  for (int k = 0; k < pos; k++) {
+ for (int k = 0; k < pos; k++) {
     printf("%d: (%c, %d) ",k, chars[k], counts[k]);
   }
   printf("\n");

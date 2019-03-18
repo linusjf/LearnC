@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
+
+
 int isPrime(int idx) {
   int flag = 0, div = 2;
   int limit = floor(sqrt(idx))+1;

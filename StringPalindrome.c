@@ -2,7 +2,6 @@
 #include <string.h>
 
 int scanString(char str[]) {
-  char *ptr;
   int len = strlen(str);
   int i = 0;
   while ( i < len/2 && str[i] == str[len - i - 1])
@@ -18,8 +17,6 @@ int main() {
   char line1[] = "radar";
   char line2[] = "motion";
   char *results[] = { "NO","YES"};
-  int len1 = strlen(line1);
-  int len2 = strlen(line2);
   result = scanString(line1);
   printf("Current Word: %s\n", line1);
   printf("Palindrome: %s\n", results[result]);

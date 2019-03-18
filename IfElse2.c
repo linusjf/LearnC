@@ -11,7 +11,7 @@ int main()
     {
         printf("z is odd: %d\n", z);
     }
-    if(z = y) // do you mean == instead of =?
+    if((z = y)) // do you mean == instead of =?
     {
         printf("z is even: %d\n", z);
     }

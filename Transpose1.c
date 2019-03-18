@@ -32,7 +32,7 @@ void ptrArray(int *arr, int row, int col) {
 }
 
  int main() {
-   int row = 3, col = 3, temp = 0;
+   int row = 3, col = 3;
    int arr1[][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     // display original matrix
        printf("Original\n");

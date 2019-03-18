@@ -7,7 +7,7 @@ int main() {
     int num = strcmp(str1, str2);
     printf("String1: %s\n", str1);
    printf("String2: %s\n", str2);
-    if (strcmp(str1, str2) == 0)  {
+    if (num  == 0)  {
     printf("Strings are equal: %s %s\n", str1, str2);
 
   }

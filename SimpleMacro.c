@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define add2(num1, num2){int total = 0;sum = num1 + num2;}
+#define add2(num1, num2){sum = num1 + num2;}
 
 int main() {
   int sum, num1 = 5, num2 = 8;

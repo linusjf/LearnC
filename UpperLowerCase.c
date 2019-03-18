@@ -5,7 +5,7 @@
 
 int main() {
   char *src = "This Is A Line";
-  char *lower, *upper, *chr;
+  char *lower, *upper;
   int len;
   len = strlen(src);
  lower = (char *)malloc(len+1);
