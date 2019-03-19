@@ -57,14 +57,13 @@ BINS := $(patsubst %,%$(PRG_SUFFIX),$(PRGS))
 ## It's not quite magic.Relies on implicit 
 ## rule for .c files.
 OBJS := $(patsubst %,%.o,$(PRGS))
-DEPS := $(OBJS)
+DEPS := ""
 ##
 all : $(BINS)
 ##
 ## For clarity sake we make use of:
 .SECONDEXPANSON:
 OBJ = $(patsubst %$(PRG_SUFFIX),%.o,$@)
-DEP = $(patsubst $(OBJ),,$(DEPS))
 LINK =	$(CC) $(OBJ) $(DEP) $(LDFLAGS) -o $(BIN)
 
 #$(info $$LINK is [${LINK}])
