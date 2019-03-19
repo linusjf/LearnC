@@ -76,9 +76,17 @@ endif
 ## Compile and link  the executable
 ## The rule below explicitly links the 
 ## .o files.
+.ONESHELL:
+
 %$(PRG_SUFFIX) : $(OBJS)
+	main=$$(nm $(OBJ) | grep -c 'main');
+	if [ $$main -gt 0 ]
+	then
 	-$(LINK)
-##
+	fi	
+#	-$(LINK)
+#
+#
 ## $(OBJS) should be automagically removed right after linking.
 ##
 veryclean:
