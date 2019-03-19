@@ -82,7 +82,7 @@ endif
 	main=$$(nm $(OBJ) | grep -c 'main');
 	if [ $$main -gt 0 ]
 	then
-	-$(LINK)
+	-$(LINK) | true
 	fi	
 #	-$(LINK)
 #
@@ -91,9 +91,9 @@ endif
 ##
 veryclean:
 ifeq ($(PRG_SUFFIX_FLAG),0)
-	$(RM) $(PRGS)
+	$(RM) $(PRGS) 2>/dev/null
 else
-	$(RM) $(BINS)
+	$(RM) $(BINS) 2>/dev/null
 endif
 ##
 rebuild: veryclean all
