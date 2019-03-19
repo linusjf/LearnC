@@ -40,11 +40,12 @@
 PRG_SUFFIX_FLAG := 1
 #
 ifeq ($(origin CC),default)
-CC  = gcc
+CC := gcc
 endif
 LDFLAGS := -lm
 CFLAGS_INC := -std=c11
 CFLAGS := -g -Wall  $(CFLAGS_INC)
+
 #
 ## ==================- NOTHING TO CHANGE BELOW THIS LINE ===================
 ##
@@ -56,12 +57,17 @@ BINS := $(patsubst %,%$(PRG_SUFFIX),$(PRGS))
 ## It's not quite magic.Relies on implicit 
 ## rule for .c files.
 OBJS := $(patsubst %,%.o,$(PRGS))
+DEPS := $(OBJS)
 ##
 all : $(BINS)
 ##
 ## For clarity sake we make use of:
-.SECONDEXPANSION:
+.SECONDEXPANSON:
 OBJ = $(patsubst %$(PRG_SUFFIX),%.o,$@)
+DEP = $(patsubst $(OBJ),,$(DEPS))
+LINK =	$(CC) $(OBJ) $(DEP) $(LDFLAGS) -o $(BIN)
+
+#$(info $$LINK is [${LINK}])
 ifeq ($(PRG_SUFFIX_FLAG),0)
         BIN = $(patsubst %$(PRG_SUFFIX),%,$@)
 else
@@ -71,7 +77,8 @@ endif
 ## The rule below explicitly links the 
 ## .o files.
 %$(PRG_SUFFIX) : $(OBJS)
-	$(CC) $(OBJ)  $(LDFLAGS) -o $(BIN)
+#	$(CC) $(OBJ) $(DEP) $(LDFLAGS) -o $(BIN)
+	-$(LINK)
 ##
 ## $(OBJS) should be automagically removed right after linking.
 ##

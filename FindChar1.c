@@ -1,7 +1,8 @@
 #include <ctype.h>
 #include <stdio.h>
+#include "FindChar2.h"
 
-void findChar(char str[], char c) {
+/**void findChar(char str[], char c) {
   int matchCount = 0;
   printf("String: %s\n", str);
   printf("Char: %c\n", c);
@@ -12,7 +13,8 @@ void findChar(char str[], char c) {
     }
   }
   printf("Count:%d\n\n", matchCount);
-}
+}**/
+
 int main() {
   char str1[] = "pasta";
   findChar(str1, 'a');
