@@ -1,6 +1,6 @@
 ## Synopsis
 
-This project contains code examples from Oswald Campesato's C Programming Pocket Primer. Almost all programs  can be compiled and run individually using either the shell script `buildrun.sh` or the make files `programs.make` and `test.make`.
+This project contains code examples from Oswald Campesato's C Programming Pocket Primer. Almost all programs  can be compiled and run individually using either the shell script `buildrun` or the make files `programs.make` and `test.make`.
 
 ## Code Example
 
