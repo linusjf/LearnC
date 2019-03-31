@@ -1,3 +1,6 @@
+/***
+ * This program creates a date structure in both packed and unpacked formats.While the packed format saves a byte of memory space,the misalignment of bytes causes a delay in executing both write and read instructions.
+ * ***/
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -25,6 +28,19 @@ typedef union {
   unsigned char bytes[4];
 } UNION_DATE1;
 
+struct timespec diff(struct timespec start,struct timespec end) {
+  struct timespec temp;
+  if ((end.tv_nsec - start.tv_nsec) < 0) {
+    temp.tv_sec = end.tv_sec - start.tv_sec - 1;
+    temp.tv_nsec = 1000000000 + end.tv_nsec - start.tv_nsec;
+
+  } else {
+    temp.tv_sec = end.tv_sec - start.tv_sec;
+    temp.tv_nsec = end.tv_nsec - start.tv_nsec;
+  }
+  return temp;
+}
+
 int main() {
   printf("Memory size occupied by UNION_DATE: %ld\n", sizeof(UNION_DATE));
   printf("Memory size occupied by DATE: %ld\n", sizeof(DATE));
@@ -33,8 +49,14 @@ int main() {
   /* localtime example */
   time_t rawtime;
   struct tm *timeinfo;
+  struct timespec time1, time2, difference;
+
   time(&rawtime);
   timeinfo = localtime(&rawtime);
+
+  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time1);
+  printf("%s", "\n----Packed version UNION_DATE---- \n");
+
   UNION_DATE dt;
   dt.date.day = timeinfo->tm_mday;
   dt.date.month = timeinfo->tm_mon + 1;
@@ -48,12 +70,18 @@ int main() {
   printf("First byte in hexadecimal format: %x\n", dt.bytes[0]);
   printf("Second byte in hexadecimal format: %x\n", dt.bytes[1]);
   printf("Third byte in hexadecimal format: %x\n", dt.bytes[2]);
+
+  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time2);
+  difference = diff(time1, time2);
+  printf("Time taken: %ld:%ld\n", difference.tv_sec, difference.tv_nsec);
+
+  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time1);
+  printf("%s", "\n----UnPacked version UNION_DATE1----\n");
   UNION_DATE1 dt1;
   dt1.date.day = timeinfo->tm_mday;
   dt1.date.month = timeinfo->tm_mon + 1;
   dt1.date.year = timeinfo->tm_year + 1900;
-  printf("%s", "----UnPacked version UNION_DATE1---- \n");
-  printf("Value of date: %hd %hd %d\n", dt1.date.day, dt1.date.month,
+  printf("\nValue of date: %hd %hd %d\n", dt1.date.day, dt1.date.month,
          dt1.date.year);
   printf("Value of date in hex: %x %x %x\n", dt1.date.day, dt1.date.month,
          dt1.date.year);
@@ -63,5 +91,8 @@ int main() {
   printf("Second byte in hexadecimal format: %x\n", dt1.bytes[1]);
   printf("Third byte in hexadecimal format: %x\n", dt1.bytes[2]);
   printf("Fourth byte in hexadecimal format: %x\n", dt1.bytes[3]);
+  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time2);
+  difference = diff(time1, time2);
+  printf("Time taken: %ld:%ld\n", difference.tv_sec, difference.tv_nsec);
   return 0;
 }
