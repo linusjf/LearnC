@@ -4,6 +4,8 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h> 
+#include <time.h> 
 
 #define THREAD_COUNT 5
 void *TestFunc(void *);
@@ -11,12 +13,14 @@ void *TestFunc(void *);
 int globvar;
 /* Local zero-based thread index */
 long idx[THREAD_COUNT];
-pthread_t thread_id[THREAD_COUNT]; /* POSIX Thread IDs */
+/* POSIX Thread IDs */
+pthread_t thread_id[THREAD_COUNT]; 
 
 int main() {
   int i, retval;
   pthread_t tid;
 
+  srand(time(NULL));
   globvar = 0;
   printf("Main - globvar=%d\n", globvar);
   for (i = 0; i < THREAD_COUNT; i++) {
@@ -43,9 +47,11 @@ void *TestFunc(void *parm) {
   /* The POSIX Thread library thread number */
   self = pthread_self(); 
   printf("TestFunc me=%ld - self=%ld globvar=%d\n", me, self, globvar);
-  globvar = me + 15;
+  int sleep_time = rand() % 11;
+  globvar += me + sleep_time;
   printf("TestFunc me=%ld - sleeping globvar=%d\n", me, globvar);
-  sleep(2);
+  printf("Sleeping for : %d\n", sleep_time);
+  sleep(sleep_time);
   printf("TestFunc me=%ld - done param=%ld globvar=%d\n", me, self, globvar);
   return (void *)me;
 }
