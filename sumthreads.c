@@ -19,7 +19,7 @@ pthread_attr_t attr;
 /* MUTEX data structure */
 pthread_mutex_t my_mutex;
 
-#define MAX_SIZE 4000000
+#define MAX_SIZE 10000000
 /* What we are summing... */
 double array[MAX_SIZE]; 
 
@@ -27,6 +27,7 @@ int main() {
   int i;
   pthread_t tid;
   double single, multi;
+  struct timespec start, end;
 
   /* Initialize things */
   for (i = 0; i < MAX_SIZE; i++)
@@ -38,18 +39,21 @@ int main() {
 
   /* Single threaded sum */
   GlobSum = 0;
-  clock_t begin = clock();
+  
+    clock_gettime(CLOCK_REALTIME, &start);
   for (i = 0; i < MAX_SIZE; i++)
     GlobSum = GlobSum + array[i];
-  clock_t end = clock();
-  single = (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("Single sum=%lf time=%lf\n", GlobSum, single);
+  clock_gettime(CLOCK_REALTIME, &end);
+  long seconds = end.tv_sec - start.tv_sec;
+    long nanos = seconds * 1000000000 + end.tv_nsec - start.tv_nsec;
+single = (double) (seconds * 1000000000 + nanos)/ 1000000000;
+  printf("Single sum=%lf time=%lf seconds \n", GlobSum, single);
 
   /* Use different numbers of threads to accomplish the same thing */
   for (ThreadCount = 2; ThreadCount <= MAX_THREAD; ThreadCount++) {
     printf("Threads=%d\n", ThreadCount);
     GlobSum = 0;
-    clock_t begin = clock();
+    clock_gettime(CLOCK_REALTIME, &start);
     for (i = 0; i < ThreadCount; i++) {
       idx[i] = i;
       pthread_create(&tid, &attr, SumFunc, (void *)idx[i]);
@@ -57,9 +61,11 @@ int main() {
     }
     for (i = 0; i < ThreadCount; i++)
       pthread_join(thread_id[i], NULL);
-    clock_t end = clock();
-    multi = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("Sum=%lf time=%lf\n", GlobSum, multi);
+  clock_gettime(CLOCK_REALTIME, &end);
+  long seconds = end.tv_sec - start.tv_sec;
+    long nanos = seconds * 1000000000 + end.tv_nsec - start.tv_nsec;
+multi = (double) (seconds * 1000000000 + nanos)/1000000000;
+  printf("Multi sum=%lf time=%lf seconds\n", GlobSum, multi);
     printf("Efficiency = %lf\n", single / (multi * ThreadCount));
     /* End of the ThreadCount loop */
   } 
