@@ -29,7 +29,7 @@ void *do_work(void *tid) {
   printf("Thread %d doing iterations %d to %d\n", *mytid, start, end - 1);
   for (i = start; i < end; i++) {
     a[i] = i * 1.0;
-    mysum += + a[i];
+    mysum += +a[i];
   }
 
   /* Lock the mutex and update the global sum, then exit */
