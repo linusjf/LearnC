@@ -18,7 +18,7 @@ pthread_t thread_id[THREAD_COUNT];
 /* MUTEX data structure */
 pthread_mutex_t my_mutex;
 // the barrier synchronization object
-pthread_barrier_t barrier; 
+pthread_barrier_t barrier;
 
 int main() {
   int i, retval;
@@ -27,7 +27,7 @@ int main() {
   pthread_attr_init(&attr);
   pthread_mutex_init(&my_mutex, NULL);
   // create a barrier object with a count
-  pthread_barrier_init (&barrier, NULL,THREAD_COUNT);
+  pthread_barrier_init(&barrier, NULL, THREAD_COUNT);
   srand(time(NULL));
   globvar = 0;
   printf("Main - globvar=%d\n", globvar);

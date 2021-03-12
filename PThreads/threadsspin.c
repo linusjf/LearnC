@@ -3,9 +3,9 @@
 
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
-#include <stdlib.h> 
-#include <time.h> 
 
 #define THREAD_COUNT 5
 void *SpinFunc(void *);
@@ -14,7 +14,7 @@ int globvar;
 /* Local zero-based thread index */
 long idx[THREAD_COUNT];
 /* POSIX Thread IDs */
-pthread_t thread_id[THREAD_COUNT]; 
+pthread_t thread_id[THREAD_COUNT];
 
 int main() {
   int i, retval;
@@ -31,8 +31,7 @@ int main() {
   }
   printf("Main thread - threads started globvar=%d\n", globvar);
   for (i = 0; i < THREAD_COUNT; i++) {
-    printf("Main - waiting for join %ld\n", 
-        thread_id[i]);
+    printf("Main - waiting for join %ld\n", thread_id[i]);
     retval = pthread_join(thread_id[i], NULL);
     printf("Main - back from join %d retval=%d\n", i, retval);
   }
@@ -40,15 +39,15 @@ int main() {
 }
 
 void *SpinFunc(void *parm) {
-  long me = (long) parm;
-  printf("SpinFunc me=%ld - sleeping %ld seconds ...\n", me, me+1);
-  sleep(me+1);
+  long me = (long)parm;
+  printf("SpinFunc me=%ld - sleeping %ld seconds ...\n", me, me + 1);
+  sleep(me + 1);
   printf("SpinFunc me=%ld – wake globvar=%d...\n", me, globvar);
-  globvar ++;
+  globvar++;
   printf("SpinFunc me=%ld - spinning globvar=%d...\n", me, globvar);
-  while(globvar < THREAD_COUNT ) sleep(1);
+  while (globvar < THREAD_COUNT)
+    sleep(1);
   printf("SpinFunc me=%ld – done globvar=%d...\n", me, globvar);
-  sleep(THREAD_COUNT+1);
+  sleep(THREAD_COUNT + 1);
   return (void *)me;
 }
-

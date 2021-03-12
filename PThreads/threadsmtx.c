@@ -3,9 +3,9 @@
 
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
-#include <stdlib.h> 
-#include <time.h> 
 
 #define THREAD_COUNT 5
 void *TestFunc(void *);
@@ -35,8 +35,7 @@ int main() {
   }
   printf("Main thread - threads started globvar=%d\n", globvar);
   for (i = 0; i < THREAD_COUNT; i++) {
-    printf("Main - waiting for join %ld\n", 
-        thread_id[i]);
+    printf("Main - waiting for join %ld\n", thread_id[i]);
     retval = pthread_join(thread_id[i], NULL);
     printf("Main - back from join %d retval=%d\n", i, retval);
   }
@@ -47,9 +46,9 @@ void *TestFunc(void *parm) {
   long me, self;
 
   /* My own assigned thread ordinal */
-  me = (long)parm;        
+  me = (long)parm;
   /* The POSIX Thread library thread number */
-  self = pthread_self(); 
+  self = pthread_self();
   printf("TestFunc me=%ld - self=%ld globvar=%d\n", me, self, globvar);
   int sleep_time = rand() % 11;
   pthread_mutex_lock(&my_mutex);
