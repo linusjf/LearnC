@@ -40,11 +40,12 @@ void *inc_count(void *t) {
     if (count == COUNT_LIMIT) {
       printf("inc_count(): thread %ld, count = %d  Threshold reached. ", my_id,
              count);
+      printf("inc_count(): thread %ld, i = %d  Threshold reached. ", my_id, i);
       pthread_cond_signal(&count_threshold_cv);
       printf("Just sent signal.\n");
     }
-    printf("inc_count(): thread %ld, count = %d, unlocking mutex\n", my_id,
-           count);
+    printf("inc_count(): thread %ld, count = %d, i = %d, unlocking mutex\n", my_id,
+           count,i);
     pthread_mutex_unlock(&count_mutex);
 
     /* Do some work so threads can alternate on mutex lock */
