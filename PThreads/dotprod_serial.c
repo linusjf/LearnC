@@ -52,7 +52,7 @@ void dotprod() {
   */
 
   mysum = 0;
-  for (i = start; i < end; i++) 
+  for (i = start; i < end; i++)
     mysum += (x[i] * y[i]);
   dotstr.sum = mysum;
 }
