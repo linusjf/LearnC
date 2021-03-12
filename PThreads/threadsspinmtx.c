@@ -18,7 +18,7 @@ pthread_t thread_id[THREAD_COUNT];
 /* MUTEX data structure */
 pthread_mutex_t my_mutex;
 
-int main() {
+int main(int argc, char *argv[]) {
   int i, retval;
   pthread_t tid;
   pthread_attr_t attr;

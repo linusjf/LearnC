@@ -20,7 +20,7 @@ pthread_mutex_t my_mutex;
 // the barrier synchronization object
 pthread_barrier_t barrier;
 
-int main() {
+int main(int argc, char *argv[]) {
   int i, retval;
   pthread_t tid;
   pthread_attr_t attr;

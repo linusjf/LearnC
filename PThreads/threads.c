@@ -16,7 +16,7 @@ long idx[THREAD_COUNT];
 /* POSIX Thread IDs */
 pthread_t thread_id[THREAD_COUNT];
 
-int main() {
+int main(int argc, char *argv[]) {
   int i, retval;
   pthread_t tid;
 

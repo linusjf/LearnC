@@ -23,7 +23,7 @@ pthread_mutex_t my_mutex;
 /* What we are summing... */
 double array[MAX_SIZE];
 
-int main() {
+int main(int argc, char *argv[]) {
   int i;
   pthread_t tid;
   double single, multi;
