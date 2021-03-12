@@ -22,13 +22,13 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 void *ThreadEntry(void *id) {
   // force the pointer to be a 64bit integer
-  const int myid = (long)id; 
+  const int myid = (long)id;
 
   const int workloops = 5;
   for (int i = 0; i < workloops; i++) {
     printf("[thread %d] working (%d/%d)\n", myid, i, workloops);
     // simulate doing some costly work
-    sleep(1); 
+    sleep(1);
   }
 
   // we're going to manipulate done and use the cond, so we need the mutex
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
   pthread_mutex_lock(&mutex);
 
   // are the other threads still busy?
- while (done < NUMTHREADS) {
+  while (done < NUMTHREADS) {
     printf("[thread main] done is %d which is < %d so waiting on cond\n", done,
            (int)NUMTHREADS);
 
