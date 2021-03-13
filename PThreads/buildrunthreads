@@ -3,4 +3,4 @@
 [ $# -eq 0 ] && { echo "Usage: $0 <File Name without extension> options";exit 1; }
 `rm -f $1.exe`
 `gcc -std=c11 $1.c -lm -lpthread -o $1.exe $2`
-[ -e $1.exe ] && { termux-elf-cleaner $1.exe &> /dev/null;exec ./$1.exe;exit 0; }
+[ -e $1.exe ] && { termux-elf-cleaner $1.exe &> /dev/null;timeout 30 ./$1.exe;exit 0; }
