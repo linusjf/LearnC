@@ -1,6 +1,6 @@
 #include <pthread.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define P_M_L(x) pthread_mutex_lock(x)
 #define P_M_U(x) pthread_mutex_unlock(x)
@@ -19,17 +19,16 @@ void foo_bar_inc() {
   P_M_U(&foo_mutex);
 }
 
-void bar_foo_dec()
-{
-    P_M_L(&bar_mutex);
-    while (pthread_mutex_trylock(&foo_mutex)) {
-	P_M_U(&bar_mutex);
-	sleep(1);
-        P_M_L(&bar_mutex);
-    }
-    foo = bar--;
+void bar_foo_dec() {
+  P_M_L(&bar_mutex);
+  while (pthread_mutex_trylock(&foo_mutex)) {
     P_M_U(&bar_mutex);
-    P_M_U(&foo_mutex);
+    sleep(1);
+    P_M_L(&bar_mutex);
+  }
+  foo = bar--;
+  P_M_U(&bar_mutex);
+  P_M_U(&foo_mutex);
 }
 
 void *threadone() {

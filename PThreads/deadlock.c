@@ -1,6 +1,6 @@
 #include <pthread.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define P_M_L(x) pthread_mutex_lock(x)
 #define P_M_U(x) pthread_mutex_unlock(x)
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   printf("Deadlock example\n");
   pthread_create(&thread1, NULL, threadone, NULL);
   pthread_create(&thread2, NULL, threadtwo, NULL);
-  pthread_join(thread1,NULL);
+  pthread_join(thread1, NULL);
   pthread_join(thread2, NULL);
   printf("Normal exit. Shouldn't reach here...\n");
   pthread_exit(NULL);
