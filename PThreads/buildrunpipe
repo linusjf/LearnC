@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+# display usage
+`rm -f pipe.exe`
+`gcc -std=c11 pipe.c -lm -lpthread -o pipe.exe`
+[ -e pipe.exe ] && { termux-elf-cleaner pipe.exe &> /dev/null;exec ./pipe.exe < pipe.dat;exit 0; }
