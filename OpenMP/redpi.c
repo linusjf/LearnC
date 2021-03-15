@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   step = 1.0 / (double)num_steps;
 #pragma omp parallel private(i, aux, x) shared(sum)
   {
-#pragma omp for reduction(+:sum) schedule(static)
+#pragma omp for reduction(+ : sum) schedule(static)
     for (i = 0; i < num_steps; i++) {
       x = (i + 0.5) * step;
       aux = 4.0 / (1.0 + x * x);
