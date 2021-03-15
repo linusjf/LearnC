@@ -12,7 +12,7 @@ int main()
     *test_ptr = b;
 
     const char  *const const_ptr = &a;
-
+    (void) const_ptr;
 //    const_ptr = &b;
 
   //  *const_ptr = b;

@@ -9,7 +9,7 @@ typedef union  {
 #pragma pack(pop)
 
 int main() {
-  MYDATA mydata;
+  //MYDATA mydata;
   printf("%ld %ld %ld ",sizeof(int),sizeof(float),sizeof(char[10]));
   printf("Memory allocated to mydata: %ld\n", sizeof(MYDATA));
   return 0;

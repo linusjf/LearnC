@@ -10,8 +10,9 @@
 
 int main() {
   int m, n;
-  for (m = 0; m <= 4; m++)
+  for (m = 0; m <= 4; m++) {
     for (n = 0; n < 6 - m; n++)
       printf("A(%d, %d) = %d\n", m, n, ackermann(m,n));
-    return 0;
+  }
+  return 0;
 }

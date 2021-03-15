@@ -3,9 +3,7 @@
 
 int main() {
   char buf[MAX];
-  // will pop warning since gets is deprecated in
-  // C11. Function definition no longer present in // stdio.h. Use fgets instead.
-  gets(buf);
+  fgets(buf, MAX, stdin);
   printf("string is: %s\n", buf);
   return 0;
 }

@@ -42,6 +42,7 @@ PRG_SUFFIX_FLAG := 1
 ifeq ($(origin CC),default)
 CC := gcc
 endif
+TERMUX := termux-elf-cleaner
 LDFLAGS := -lm
 CFLAGS_INC := -std=c11
 CFLAGS := -g -Wall  $(CFLAGS_INC)
@@ -67,6 +68,7 @@ all : $(BINS)
 OBJ = $(patsubst %$(PRG_SUFFIX),%.o,$@)
 
 LINK =	$(CC) $(OBJ) $(DEPS) $(LDFLAGS) -o $(BIN)
+STRIP =	$(TERMUX) $(BIN) > /dev/null
 
 ifeq ($(PRG_SUFFIX_FLAG),0)
         BIN = $(patsubst %$(PRG_SUFFIX),%,$@)
@@ -83,6 +85,7 @@ endif
 	if [ $$main -gt 0 ]
 	then
 	-$(LINK) | true
+	-$(STRIP)
 	fi	
 #	-$(LINK)
 #

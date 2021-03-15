@@ -68,7 +68,7 @@ all : $(BINS)
 OBJ = $(patsubst %$(PRG_SUFFIX),%.o,$@)
 
 LINK =	$(CC) $(OBJ) $(DEPS) $(LDFLAGS) -o $(BIN)
-STRIP =	$(TERMUX) $(BIN) &> /dev/null
+STRIP =	$(TERMUX) $(BIN) > /dev/null
 
 ifeq ($(PRG_SUFFIX_FLAG),0)
         BIN = $(patsubst %$(PRG_SUFFIX),%,$@)
