@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
   int nthreads;
 
   /* Fork a team of threads with each thread having a private tid variable */
-#pragma omp parallel
+#pragma omp parallel num_threads(4)
   {
     /* Obtain and print thread id */
     int tid = omp_get_thread_num();

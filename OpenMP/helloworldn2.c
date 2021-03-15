@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) {
 
   int nthreads;
-
+  omp_set_num_threads(4);
   /* Fork a team of threads with each thread having a private tid variable */
 #pragma omp parallel
   {

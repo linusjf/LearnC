@@ -1,25 +1,23 @@
- #include <omp.h>
- #define N 1000
- #define CHUNKSIZE 100
+#include <omp.h>
+#define N 1000
+#define CHUNKSIZE 100
 
-int  main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 
- int i, chunk;
- float a[N], b[N], c[N];
+  int i, chunk;
+  float a[N], b[N], c[N];
 
-   /* Some initializations */
- for (i=0; i < N; i++)
-   a[i] = b[i] = i * 1.0;
- chunk = CHUNKSIZE;
- (void) chunk;
- #pragma omp parallel shared(a,b,c,chunk) private(i)
-   {
+  /* Some initializations */
+  for (i = 0; i < N; i++)
+    a[i] = b[i] = i * 1.0;
+  chunk = CHUNKSIZE;
+  (void)chunk;
+#pragma omp parallel shared(a, b, c, chunk) private(i)
+  {
 
-   #pragma omp for schedule(dynamic,chunk) nowait
-   for (i=0; i < N; i++)
-     c[i] = a[i] + b[i];
-
-   }     
-   /* end of parallel region */
- }
-
+#pragma omp for schedule(dynamic, chunk) nowait
+    for (i = 0; i < N; i++)
+      c[i] = a[i] + b[i];
+  }
+  /* end of parallel region */
+}
