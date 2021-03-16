@@ -22,8 +22,9 @@ int main(int argc, char *argv[]) {
       aux = 4.0 / (1.0 + x * x);
       sum += aux;
     }
-#pragma omp critical
-    pi += step * sum;
+    sum = sum * step;
+#pragma omp atomic
+    pi += sum;
   }
   printf("pi = %f\n", pi);
 }
