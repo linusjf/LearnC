@@ -2,5 +2,5 @@
 #display usage
 [ $# -eq 0 ] && { echo "Usage: $0 <File Name without extension> options";exit 1;}
 `rm -f $1.exe`
-`gcc -std=c11 -fopenmp $1.c -o $1.exe $2` 
+`gcc -std=c11 -lm -fopenmp $1.c -o $1.exe $2` 
 [ -e $1.exe ] && { termux-elf-cleaner $1.exe &> /dev/null; exec ./$1.exe;exit 0;}
