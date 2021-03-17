@@ -6,9 +6,9 @@ int main(int argc, char *argv[]) {
   g = (int *)calloc(10000, sizeof(int));
   for (i = 0; i < 10000; i++)
     g[i] = 1;
-omp_set_num_threads(6);
+  omp_set_num_threads(6);
 #pragma omp parallel for shared(b)
-  for (i = 0; i < 10000; i++) 
+  for (i = 0; i < 10000; i++)
     b += g[i];
   printf("%d\n", b);
   b = 0;
