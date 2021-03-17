@@ -7,11 +7,11 @@ int main(int argc, char *argv[]) {
 #pragma omp parallel num_threads(2)
   {
     if (omp_get_thread_num() == 0)
-    /* line A */
-      omp_set_num_threads(4); 
+      /* line A */
+      omp_set_num_threads(4);
     else
-    /* line B */
-      omp_set_num_threads(6); 
+      /* line B */
+      omp_set_num_threads(6);
     /* The following statement will print out
      *
      * 0: 2 4
