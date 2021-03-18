@@ -1,14 +1,14 @@
-# include <stdlib.h>
-# include <stdio.h>
-# include <omp.h>
+#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int main ( int argc, char *argv[] );
-void prime_number_sweep ( int n_lo, int n_hi, int n_factor );
-int prime_number ( int n );
+int main(int argc, char *argv[]);
+void prime_number_sweep(int n_lo, int n_hi, int n_factor);
+int prime_number(int n);
 
 /******************************************************************************/
 
-int main ( int argc, char *argv[] )
+int main(int argc, char *argv[])
 
 /******************************************************************************/
 /*
@@ -23,7 +23,7 @@ int main ( int argc, char *argv[] )
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -38,37 +38,37 @@ int main ( int argc, char *argv[] )
   int n_hi;
   int n_lo;
 
-  printf ( "\n" );
-  printf ( "PRIME_OPENMP\n" );
-  printf ( "  C/OpenMP version\n" );
+  printf("\n");
+  printf("PRIME_OPENMP\n");
+  printf("  C/OpenMP version\n");
 
-  printf ( "\n" );
-  printf ( "  Number of processors available = %d\n", omp_get_num_procs ( ) );
-  printf ( "  Number of threads =              %d\n", omp_get_max_threads ( ) );
+  printf("\n");
+  printf("  Number of processors available = %d\n", omp_get_num_procs());
+  printf("  Number of threads =              %d\n", omp_get_max_threads());
 
   n_lo = 1;
   n_hi = 131072;
   n_factor = 2;
 
-  prime_number_sweep ( n_lo, n_hi, n_factor );
+  prime_number_sweep(n_lo, n_hi, n_factor);
 
   n_lo = 5;
   n_hi = 500000;
   n_factor = 10;
 
-  prime_number_sweep ( n_lo, n_hi, n_factor );
-/*
-  Terminate.
-*/
-  printf ( "\n" );
-  printf ( "PRIME_OPENMP\n" );
-  printf ( "  Normal end of execution.\n" );
+  prime_number_sweep(n_lo, n_hi, n_factor);
+  /*
+    Terminate.
+  */
+  printf("\n");
+  printf("PRIME_OPENMP\n");
+  printf("  Normal end of execution.\n");
 
   return 0;
 }
 /******************************************************************************/
 
-void prime_number_sweep ( int n_lo, int n_hi, int n_factor )
+void prime_number_sweep(int n_lo, int n_hi, int n_factor)
 
 /******************************************************************************/
 /*
@@ -102,33 +102,32 @@ void prime_number_sweep ( int n_lo, int n_hi, int n_factor )
   int primes;
   double wtime;
 
-  printf ( "\n" );
-  printf ( "TEST01\n" );
-  printf ( "  Call PRIME_NUMBER to count the primes from 1 to N.\n" );
-  printf ( "\n" );
-  printf ( "         N        Pi          Time\n" );
-  printf ( "\n" );
+  printf("\n");
+  printf("TEST01\n");
+  printf("  Call PRIME_NUMBER to count the primes from 1 to N.\n");
+  printf("\n");
+  printf("         N        Pi          Time\n");
+  printf("\n");
 
   n = n_lo;
 
-  while ( n <= n_hi )
-  {
-    wtime = omp_get_wtime ( );
+  while (n <= n_hi) {
+    wtime = omp_get_wtime();
 
-    primes = prime_number ( n );
+    primes = prime_number(n);
 
-    wtime = omp_get_wtime ( ) - wtime;
+    wtime = omp_get_wtime() - wtime;
 
-    printf ( "  %8d  %8d  %14f\n", n, primes, wtime );
+    printf("  %8d  %8d  %14f\n", n, primes, wtime);
 
     n *= n_factor;
   }
- 
+
   return;
 }
 /******************************************************************************/
 
-int prime_number ( int n )
+int prime_number(int n)
 
 /******************************************************************************/
 /*
@@ -158,7 +157,7 @@ int prime_number ( int n )
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -180,20 +179,14 @@ int prime_number ( int n )
   int prime;
   int total = 0;
 
-# pragma omp parallel \
-  shared ( n ) \
-  private ( i, j, prime )
-  
+#pragma omp parallel shared(n) private(i, j, prime)
 
-# pragma omp for reduction ( + : total )
-  for ( i = 2; i <= n; i++ )
-  {
+#pragma omp for reduction(+ : total)
+  for (i = 2; i <= n; i++) {
     prime = 1;
 
-    for ( j = 2; j < i; j++ )
-    {
-      if ( i % j == 0 )
-      {
+    for (j = 2; j < i; j++) {
+      if (i % j == 0) {
         prime = 0;
         break;
       }
