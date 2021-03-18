@@ -1,7 +1,7 @@
 #include <omp.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 typedef struct {
   int a, b;
@@ -29,17 +29,11 @@ void incr_pair(pair *p, int a, int b) {
   omp_unset_nest_lock(&p->lck);
 }
 
-int work1() {
- return rand() % 10 + 1;
-}
+int work1() { return rand() % 10 + 1; }
 
-int work2() {
- return rand() % 10 + 1;
-}
+int work2() { return rand() % 10 + 1; }
 
-int work3() {
- return rand() % 10 + 1;
-}
+int work3() { return rand() % 10 + 1; }
 
 void f(pair *p) {
 #pragma omp parallel sections
@@ -53,7 +47,7 @@ void f(pair *p) {
 
 int main(int argc, char *argv[]) {
   srand(time(NULL));
-  pair*  val = malloc(sizeof(pair));
+  pair *val = malloc(sizeof(pair));
   val->a = val->b = 0;
   omp_init_nest_lock(&val->lck);
   f(val);
