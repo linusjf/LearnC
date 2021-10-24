@@ -1,0 +1,3 @@
+lexer.c
+count_words
+*.o
