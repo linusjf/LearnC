@@ -2,24 +2,18 @@
 # , 2021-10-24 08:02
 #
 SHELL := /usr/bin/env bash
-VPATH := src
-CPPFLAGS := -I include
+VPATH := src include
+CPPFLAGS = -I include
+CC := gcc
+LEX := flex
+
+all: count_words
+	@termux-elf-cleaner $> &> /dev/null || true
 
 count_words: count_words.o counter.o lexer.o -lfl
-	gcc $(CPPFLAGS) $^ -o $@
-	@termux-elf-cleaner $@ &> /dev/null || true
-
-count_words.o: count_words.c
-	gcc $(CPPFLAGS) -c $<
-
-counter.o: counter.c
-	gcc $(CPPFLAGS) -c $<
-
-lexer.o: lexer.c
-	gcc $(CPPFLAGS) -c $<
-
-lexer.c: lexer.l
-	flex -t $< > $@
+count_words.o: counter.h
+counter.o: counter.h lexer.h
+lexer.o: lexer.h
 
 clean:
 	rm -f *.o count_words lexer.c || true
