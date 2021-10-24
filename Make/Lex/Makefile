@@ -8,7 +8,7 @@ CC := gcc
 LEX := flex
 
 all: count_words
-	@termux-elf-cleaner $> &> /dev/null || true
+	@termux-elf-cleaner $< &> /dev/null || true
 
 count_words: count_words.o counter.o lexer.o -lfl
 count_words.o: counter.h
