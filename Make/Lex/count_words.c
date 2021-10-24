@@ -7,12 +7,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-extern int fee_count, fie_count, foe_count, fum_count;
-extern int yylex(void);
+#include "counter.h"
 
 int main(void) {
-  yylex();
-  printf("%d %d %d %d\n", fee_count, fie_count, foe_count, fum_count);
+  int counts[4];
+  counter(counts);
+  printf("%d %d %d %d\n", counts[0], counts[1], counts[2], counts[3]);
   exit(0);
 }

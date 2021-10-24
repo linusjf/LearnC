@@ -3,11 +3,14 @@
 #
 SHELL := /usr/bin/env bash
 
-count_words: count_words.o lexer.o -lfl
+count_words: count_words.o counter.o lexer.o -lfl
 	gcc $^ -o $@
 	@termux-elf-cleaner $@ &> /dev/null || true
 
 count_words.o: count_words.c
+	gcc -c $<
+
+counter.o: counter.c
 	gcc -c $<
 
 lexer.o: lexer.c
