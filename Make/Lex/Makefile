@@ -4,6 +4,13 @@
 SHELL := /usr/bin/env bash
 VPATH := src include
 CPPFLAGS = -I include
+ISTERMUX := ${TERMUX}
+$(info $$ISTERMUX is [${ISTERMUX}])
+ifeq ($(ISTERMUX), 1)
+	PREFIX := /data/data/com.termux/files/usr
+else
+	PREFIX := /usr
+endif
 CC := gcc
 LEX := flex
 SOURCES := count_words.c lexer.c counter.c
@@ -19,7 +26,16 @@ include $(subst .c,.d,$(SOURCES))
 all: count_words
 	@termux-elf-cleaner $< &> /dev/null || true
 
-count_words: count_words.o counter.o lexer.o -lfl
+count_words: libcounter.a $(PREFIX)/lib/libfl.so
+
+libcounter.a: libcounter.a(lexer.o) libcounter.a(counter.o)
+
+libcounter.a(lexer.o): lexer.o
+	$(AR) $(ARFLAGS) $@ $<
+
+libcounter.a(counter.o): counter.o
+	$(AR) $(ARFLAGS) $@ $<
+
 count_words.o: counter.h
 counter.o: counter.h lexer.h
 lexer.o: lexer.h
