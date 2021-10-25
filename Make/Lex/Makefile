@@ -26,21 +26,13 @@ include $(subst .c,.d,$(SOURCES))
 all: count_words
 	@termux-elf-cleaner $< &> /dev/null || true
 
-count_words: libcounter.a $(PREFIX)/lib/libfl.so
-
+count_words: libcounter.a -lfl
 libcounter.a: libcounter.a(lexer.o) libcounter.a(counter.o)
-
-libcounter.a(lexer.o): lexer.o
-	$(AR) $(ARFLAGS) $@ $<
-
-libcounter.a(counter.o): counter.o
-	$(AR) $(ARFLAGS) $@ $<
-
 count_words.o: counter.h
 counter.o: counter.h lexer.h
 lexer.o: lexer.h
 
 clean:
-	rm -f *.o *.d count_words lexer.c || true
+	rm -f *.o *.d *.a count_words lexer.c || true
 
 .PHONY: clean
