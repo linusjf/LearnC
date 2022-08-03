@@ -13,6 +13,7 @@ else
 endif
 CC := gcc
 LEX := flex
+
 SOURCES := count_words.c lexer.c counter.c
 $(info $$SOURCES is [${SOURCES}])
 
