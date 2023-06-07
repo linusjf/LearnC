@@ -1,3 +1,5 @@
+[![Hits-of-Code](https://hitsofcode.com/github/linusjf/LearnC?branch=main)](https://hitsofcode.com/github/linusjf/LearnC/view?branch=main)
+
 ## Synopsis
 
 This project contains code examples from Oswald Campesato's C Programming Pocket Primer. Almost all programs  can be compiled and run individually using either the shell script `buildrun` or the make files `programs.make` and `test.make`.
@@ -25,5 +27,3 @@ No unit tests.
 Obviously the author and myself for any code enhancements.
 
 ## License
-
-
